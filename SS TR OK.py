@@ -67,5 +67,5 @@ print("\n--- Eredmények ---")
 print(f"Naprendszer illesztett paraméter: a = {a_fit:.3f} ± {a_err:.3f} (km/s * sqrt(10^6 km))")
 print(f"Naprendszer központi tömege: ({M_sun:.2e} ± {M_sun_err:.2e}) kg")
 
-print(f"\nHD10180 illesztett paraméter: b = {b_fit:.3f} ± {b_err:.3f} (km/s * sqrt(10^6 km))")
-print(f"HD10180 központi tömege: ({M_trappist:.2e} ± {M_trappist_err:.2e}) kg")
+print(f"\nTRAPPIST-1 illesztett paraméter: b = {b_fit:.3f} ± {b_err:.3f} (km/s * sqrt(10^6 km))")
+print(f"TRAPPIST-1 központi tömege: ({M_trappist:.2e} ± {M_trappist_err:.2e}) kg")
