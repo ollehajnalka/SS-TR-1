@@ -6,10 +6,13 @@ from scipy.optimize import curve_fit
 x_data = np.array([57.9, 108.2, 149.6, 228, 778.5, 1432, 2867, 4515, 5906.4])  # 10^6 km
 y_data = np.array([47.4, 35, 29.8, 24.1, 13.1, 9.7, 6.8, 5.4, 4.7])  # km/s
 
-# --- 2. TRAPPIST-1 adatok ---
+# --- 2. HD10180 adatok ---
 # távolság AU-ban -> millió km
-z_data = np.array([11.11, 15.21, 21.44, 28.17, 37.1, 45.1, 63]) * 149.6 * 1e-3  # 10^6 km
-T_days = np.array([1.51, 2.42, 4.05, 6.1, 9.2, 12.35, 20])  # nap
+#z_data = np.array([0.06412, 0.1286, 0.2699, 0.4929, 1.427, 3.381]) * 149.6  # 10^6 km  HD10180
+#T_days = np.array([5.7597, 16.3570, 49.748, 122.744, 604.67, 2205.0])  # nap HD10180
+z_data = np.array([11.11, 15.21, 21.44, 28.17, 37.1, 45.1, 63]) * 149.6 * 1e-3  # 10^6 km TRAPPIST-1
+T_days = np.array([1.51, 2.42, 4.05, 6.1, 9.2, 12.35, 20])  # nap TRAPPIST-1
+
 # keringési sebesség km/s
 w_data = 2 * np.pi * z_data * 1e6 / (T_days * 86400) / 1000  # átváltás: km/s
 
@@ -33,16 +36,13 @@ z_fit = np.linspace(z_data.min(), z_data.max(), 100)
 w_fit = func(z_fit, b_fit)
 
 plt.figure(figsize=(10, 6))
-plt.scatter(x_data, y_data, label='Naprendszer', color='blue')
-plt.scatter(z_data, w_data, label='TRAPPIST-1', color='red')
-plt.plot(x_fit, y_fit, label=f'Illesztett Naprendszer: a = {a_fit:.2f}±{a_err:.2f}', color='blue')
-plt.plot(z_fit, w_fit, label=f'Illesztett TRAPPIST-1: b = {b_fit:.2f}±{b_err:.2f}', color='red')
-plt.title('Naprendszer és TRAPPIST-1 rotációs görbéje')
-plt.xlabel('Távolság - $10^6$ km')
-plt.ylabel('Keringési sebesség - km/s')
+plt.scatter(z_data, w_data, label='Bolygók', color='b')
+plt.plot(z_fit, w_fit, label='Illesztett görbe', color='r')
+plt.title('TRAPPIST-1 rotációs görbéje')
+plt.xlabel('Csillagtól való távolság (x$10^{6}$ km)')
+plt.ylabel('Keringési sebesség (km/s)')
 plt.legend()
 plt.grid()
-plt.tight_layout()
 plt.show()
 
 # --- 6. Tömegszámítás ---
@@ -67,5 +67,5 @@ print("\n--- Eredmények ---")
 print(f"Naprendszer illesztett paraméter: a = {a_fit:.3f} ± {a_err:.3f} (km/s * sqrt(10^6 km))")
 print(f"Naprendszer központi tömege: ({M_sun:.2e} ± {M_sun_err:.2e}) kg")
 
-print(f"\nTRAPPIST-1 illesztett paraméter: b = {b_fit:.3f} ± {b_err:.3f} (km/s * sqrt(10^6 km))")
-print(f"TRAPPIST-1 központi tömege: ({M_trappist:.2e} ± {M_trappist_err:.2e}) kg")
+print(f"\nHD10180 illesztett paraméter: b = {b_fit:.3f} ± {b_err:.3f} (km/s * sqrt(10^6 km))")
+print(f"HD10180 központi tömege: ({M_trappist:.2e} ± {M_trappist_err:.2e}) kg")
