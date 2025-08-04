@@ -1,0 +1,34 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+
+
+x_data = np.array([57.9, 108.2, 149.6, 228, 778.5, 1432, 2867, 4515, 5906.4])
+y_data = np.array([47.4, 35, 29.8, 24.1, 13.1, 9.7, 6.8, 5.4, 4.7])
+def func(x, a):
+    return a / np.sqrt(x)
+popt, _ = curve_fit(func, x_data, y_data)
+a_fit = popt[0]
+print(f"Fitted function: y = {a_fit} / sqrt(x)")
+
+# Generate x values for the fitted curve
+x_fit = np.linspace(x_data.min(), x_data.max(), 100)
+y_fit = func(x_fit, a_fit)
+
+# Plot the data points and the fitted curve
+plt.figure(figsize=(10, 6))
+plt.scatter(x_data, y_data, label='Bolygók', color='b')
+plt.plot(x_fit, y_fit, label='Illesztett görbe', color='r')
+plt.title('Naprendszer rotációs görbéje')
+plt.xlabel('Naptól való távolság (x$10^{6}$ km)')
+plt.ylabel('Keringési sebesség (km/s)')
+plt.legend()
+plt.grid()
+plt.show()
+
+StarMass = a_fit**2/(6.67*10**(-11)*10**(-15))
+print("a központi csillag tömege:", StarMass)
+
+# Print the exact equation of the fitted function
+#print(f"Fitted function: y = {a_fit:.4f} / sqrt(x)")
+
